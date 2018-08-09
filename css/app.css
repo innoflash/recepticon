@@ -1,0 +1,66 @@
+@font-face {
+    font-family: appFont;
+    src: url("../fonts/centurygothic.ttf");
+}
+body{
+    font-family: appFont;
+}
+
+.car .item-media .fa{
+    color: #0074BD;
+}
+#myCar .item-title, #myCar .item-media{
+    color: #0074BD;
+}
+.navbar .title {
+    color: #9A0A1F;
+}
+.page-previous{
+    display: none;
+}
+.home-icons{
+    width: 100%;
+}
+.shooper .title {
+    color: #9A0A1F;
+}
+.navbar a, .back {
+    color: #9A0A1F;
+}
+.user_panel{
+    background: #FFA500;
+    margin: 0 auto;
+    margin-top: -20px;
+    padding: 20px;
+
+}
+.user_panel h2 {
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.wrap_content{
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 55px;
+
+}
+#logo {
+    display: block;
+    width: 100px;
+    border: 5px solid #dfdfdf;
+    margin: 0 auto;
+       margin-top: -50px;
+    margin-bottom: 20px;
+     /*  position: relative;*/
+    border-radius: 120px;
+}
+#ad_image{
+    position: absolute;
+    bottom: 0px;
+    padding: 4px;
+    width: 100%;
+}
