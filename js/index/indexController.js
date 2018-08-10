@@ -2,12 +2,17 @@ define(["app", "js/index/indexView"], function (app, View) {
     var $ = jQuery;
     var $$ = Dom7;
     var user = {};
+    var authProvider = null;
 
     var bindings = [
         {
             element: '#btnFbSignin',
             event: 'click',
             handler: fbAuthentication
+        }, {
+            element: "#btnGpSignin",
+            event: 'click',
+            handler: googleAuth
         }, {
             element: '#btnSignIn',
             event: 'click',
@@ -84,7 +89,32 @@ define(["app", "js/index/indexView"], function (app, View) {
     }
 
     function fbAuthentication() {
+        authProvider = new firebase.auth.FacebookAuthProvider();
+        authProvider.addScope('user_birthday');
+        firebase.auth().signInWithRedirect(authProvider).then(function () {
+            return firebase.auth().getRedirectResult();
+        }).then(function (result) {
+            console.log(result);
+        }).catch(function (error) {
+            console.log(error);
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            app.f7.dialog.alert(errorMessage);
+        });
+    }
 
+    function googleAuth() {
+        authProvider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(authProvider).then(function () {
+            return firebase.auth().getRedirectResult();
+        }).then(function (result) {
+            console.log(result);
+        }).catch(function (error) {
+            console.log(error);
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            app.f7.dialog.alert(errorMessage);
+        });
     }
 
     function onOut() {
