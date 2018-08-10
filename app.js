@@ -53,6 +53,9 @@ define('app', ['js/router'], function (Router) {
             }, {
                 path: '/profile',
                 url: 'pages/profile.html'
+            }, {
+                path: '/receipt/:receiptid',
+                url: 'pages/receipt.html'
             }
         ],
         theme: 'ios',

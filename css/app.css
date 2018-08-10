@@ -28,7 +28,7 @@ body{
     color: #9A0A1F;
 }
 .user_panel{
-    background: #FFA500;
+    background: rgba(255, 165, 0, 0.8);
     margin: 0 auto;
     margin-top: -20px;
     padding: 20px;
@@ -63,4 +63,21 @@ body{
     bottom: 0px;
     padding: 4px;
     width: 100%;
+}
+#indexPage{
+    background-image: url("../img/index_bg.jpg");
+    background-size: cover;
+}
+.card .item-media i{
+    color: #9A0A1F;
+    font-size: 25px;
+}
+.ios .item-media .icon{
+    color: #9A0A1F;
+}
+.bg-color-theme{
+    background: #9A0A1F;
+}
+.answer{
+    padding-top: 4px;
 }
