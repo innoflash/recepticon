@@ -119,4 +119,5 @@
             <path url="/__/auth/callback"/>
         </host>
     </universal-links>
+    <plugin name="cordova-plugin-x-socialsharing" spec="~5.4.1" />
 </widget>

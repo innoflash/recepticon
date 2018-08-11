@@ -1,12 +1,13 @@
 var cookienames = {
     authenticated: 'shopper_user_logged_in',
     user: 'shopper_user',
-    activate: 'shopper_active'
+    activate: 'shopper_activate',
+    auth_side: 'shopper_auth_side'
 };
 
 var app_apis = {
-    //abiri: 'http://localhost:8001/api/'
-    abiri: 'https://v2.abiri.net/api/'
+    shopper: 'http://localhost:8001/api/shopper-'
+    //shopper: 'https://v2.abiri.net/api/'
 };
 
 var messages = {

@@ -1,4 +1,4 @@
-define(['hbs!js/profile/profile'], function (profileTemplate) {
+define(['hbs!js/editprofile/profile'], function (profileTemplate) {
     var $$ = Dom7;
     var $ = jQuery;
 
@@ -6,8 +6,8 @@ define(['hbs!js/profile/profile'], function (profileTemplate) {
         bindEvents(params.bindings);
     }
 
-    function fillUser(user){
-        $('#profileContent').html(profileTemplate(user));
+    function fillUser(user) {
+        $('*#editProfileContent').html(profileTemplate(user));
     }
 
     function bindEvents(bindings) {

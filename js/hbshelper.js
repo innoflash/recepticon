@@ -72,4 +72,14 @@ define(['handlebars'], function (Handlebars) {
         }
 
     });
+    Handlebars.registerHelper('checkAuth', function (auth_type) {
+        if (auth_type == "Shopper Direct") {
+            return 'person';
+        } else if (auth_type == "Facebook Auth") {
+            return 'social_facebook';
+        } else {
+            return 'social_googleplus';
+        }
+    });
+
 });

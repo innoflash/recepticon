@@ -1,13 +1,9 @@
-define(['hbs!js/profile/profile'], function (profileTemplate) {
+define([], function () {
     var $$ = Dom7;
     var $ = jQuery;
 
     function render(params) {
         bindEvents(params.bindings);
-    }
-
-    function fillUser(user){
-        $('#profileContent').html(profileTemplate(user));
     }
 
     function bindEvents(bindings) {
@@ -17,8 +13,7 @@ define(['hbs!js/profile/profile'], function (profileTemplate) {
     }
 
     return {
-        render: render,
-        fillUser: fillUser
+        render: render
     };
 });
 
