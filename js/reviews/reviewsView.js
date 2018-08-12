@@ -12,8 +12,14 @@ define([], function () {
         }
     }
 
+    function fillTitle(string) {
+        $('#reportTitle').text(string);
+    }
+
+
     return {
-        render: render
+        render: render,
+        fillTitle: fillTitle
     };
 });
 

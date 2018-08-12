@@ -29,6 +29,10 @@ define(["app", "js/index/indexView"], function (app, View) {
             element: '#btnResetPassword',
             event: 'click',
             handler: forgotPassword
+        }, {
+            element: '#btnSignUp',
+            event: 'click',
+            handler: register
         }
     ];
 
@@ -41,7 +45,81 @@ define(["app", "js/index/indexView"], function (app, View) {
             bindings: bindings
         });
     }
-    
+
+    function register() {
+        var VF = [
+            $('#first_name'),
+            $('#last_name'),
+            $('#phone'),
+            $('#password'),
+            $('#confirm_password'),
+            $('#age')
+        ];
+
+        if (functions.isFieldsValid(VF, app)) {
+            if ($('#password').val() === $('#confirm_password').val()) {
+                if ($('#password').val().length < 6) {
+                    app.f7.dialog.alert('Password is too short, enter at least 6 characters for security reasons');
+                } else {
+                    app.f7.dialog.confirm('Hint!', 'Hey, by continuing you mean you have read and accepted our terms and conditions?', function () {
+                        app.f7.dialog.preloader('Signing up...');
+                        $.ajax({
+                            method: 'POST',
+                            url: app_apis.shopper + 'createaccount',
+                            timeout: 5000,
+                            data: {
+                                first_name: $('#first_name').val(),
+                                last_name: $('#last_name').val(),
+                                email: $('#email').val(),
+                                phone: $('#phone').val(),
+                                password: $('#password').val(),
+                                age: $('#age').val(),
+                                auth_type: 'Shopper Direct',
+                                social_id: null
+                            }
+                        }).success(function (data) {
+                            $("input[type=text], textarea").val("");
+                            console.log(data);
+                            app.f7.dialog.alert(data.message);
+                            if (data.success) {
+                                /*     loginPopup.close({
+                                         animate: true
+                                     });*/
+                                registerPopup.close({
+                                    animate: true
+                                });
+                                Cookies.set(cookienames.auth_side, auth_side.app_direct);
+                                Cookies.set(cookienames.authenticated, false);
+                                Cookies.set(cookienames.activate, true);
+                                Cookies.set(cookienames.user, data.user);
+                                activationPopup.open();
+                            } else {
+                                if (data.user == null) {
+                                    app.f7.dialog.alert('Cant create account using these details, phone number is already in use');
+                                } else {
+                                    Cookies.set(cookienames.auth_side, auth_side.abiri_direct);
+                                    Cookies.set(cookienames.user, data.user);
+                                    Cookies.set(cookienames.activate, true);
+                                    openActivation();
+                                }
+                            }
+                        }).error(function (e) {
+                            console.log(e);
+                            app.f7.dialog.alert(messages.server_error);
+                        }).always(function () {
+                            app.f7.dialog.close();
+                        });
+                    }, function () {
+                        tcPopup.open();
+                    });
+
+                }
+            } else {
+                app.f7.dialog.alert('Passwords did not match !!!');
+            }
+        }
+    }
+
     function forgotPassword() {
         var VF = [
             $('#forgot_email'),
@@ -112,7 +190,7 @@ define(["app", "js/index/indexView"], function (app, View) {
 
         var onError = function (msg) {
             console.log("Sharing failed with message: " + msg);
-            app.f7.alert("Sharing failed with message: " + msg);
+            app.f7.dialog.alert("Sharing failed with message: " + msg);
         };
 
         window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
@@ -192,12 +270,17 @@ define(["app", "js/index/indexView"], function (app, View) {
             animate: true,
             on: {
                 open: function () {
+                    user = Cookies.getJSON(cookienames.user);
                     preloadForActivation();
                 },
                 close: function () {
                     Cookies.remove(cookienames.activate);
                 }
             }
+        });
+        tcPopup = app.f7.popup.create({
+            el: '.popup-tc',
+            animate: true
         });
     }
 

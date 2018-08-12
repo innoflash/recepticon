@@ -24,7 +24,7 @@ define(['hbs!js/index/activation'], function (activationTemplate) {
     function fillUser(user) {
         console.log(user);
         $('#username').text(user.first_name + " " + user.last_name);
-        $('#shopperType').text(user.auth_side);
+        $('#userid').text('USER ID: ' + user.user_id);
         $('#logo').attr('src', user.picture);
     }
 

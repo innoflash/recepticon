@@ -46,7 +46,7 @@ define(["app", "js/profile/profileView"], function (app, View) {
                         text: 'Change Picture',
                         bold: true,
                         onClick: function () {
-                            if (Cookies.get(cookienames.auth_side) == auth_side.app_direct + "") {
+                            if (user.auth_side == auth_side.app_direct) {
                                 navigator.camera.getPicture(pictureSuccess, pictureError, cameraOptions);
                             } else {
                                 app.f7.dialog.alert('You have signed in using Social Platforms so you cannot change your picture here!');
@@ -82,7 +82,7 @@ define(["app", "js/profile/profileView"], function (app, View) {
             el: '.popover-links',
             targetEl: '.profile-pic'
         });
-        if (Cookies.get(cookienames.auth_side) == auth_side.app_direct + '') {
+        if (user.auth_side == auth_side.app_direct) {
             $('.profile-pic').on('click', function () {
                 profilePhotoPopover.open();
                 $('#openFileChooser').on('click', function () {
@@ -156,7 +156,11 @@ define(["app", "js/profile/profileView"], function (app, View) {
     }
 
     function changePassword() {
-        app.mainView.router.navigate('/changepassword');
+        if (user.auth_side == auth_side.app_direct) {
+            app.mainView.router.navigate('/changepassword');
+        } else {
+            app.f7.dialog.alert(messages.social_blockade);
+        }
     }
 
     function deleteProfile() {
@@ -198,10 +202,10 @@ define(["app", "js/profile/profileView"], function (app, View) {
     }
 
     function editProfile() {
-        if (Cookies.get(cookienames.auth_side) == auth_side.app_direct + '') {
+        if (user.auth_side == auth_side.app_direct) {
             app.mainView.router.navigate('/editprofile');
         } else {
-            app.f7.dialog.alert('You can`t edit your profile from here unfortunately because you have used social platform login');
+            app.f7.dialog.alert(messages.social_blockade);
         }
     }
 

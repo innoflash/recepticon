@@ -1,4 +1,4 @@
-define([], function () {
+define(['hbs!js/receipts/receipt'], function (receiptTemplate) {
     var $$ = Dom7;
     var $ = jQuery;
 
@@ -12,8 +12,24 @@ define([], function () {
         }
     }
 
+    function fillSelectedReceipts(selectedReceipts) {
+        $('#selectedReceipts').text(selectedReceipts + ' RECEIPTS');
+    }
+
+    function fillReceipts(data){
+        console.log(data);
+        $('*#myReceipts').html(receiptTemplate(data));
+    }
+
+    function appendReceipts(data){
+        $('*#myReceipts').append(receiptTemplate(data));
+    }
+
     return {
-        render: render
+        render: render,
+        fillReceipts: fillReceipts,
+        fillSelectedReceipts: fillSelectedReceipts,
+        appendReceipts: appendReceipts
     };
 });
 
