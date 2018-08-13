@@ -6,8 +6,8 @@ var cookienames = {
 };
 
 var app_apis = {
-    shopper: 'http://localhost:8001/api/shopper-'
-    //shopper: 'https://v2.abiri.net/api/'
+    //shopper: 'http://localhost:8001/api/shopper-'
+    shopper: 'https://shopper.innoflash.net/api/shopper-'
 };
 
 var messages = {
