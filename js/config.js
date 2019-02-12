@@ -7,7 +7,7 @@ var cookienames = {
 
 var app_apis = {
     //shopper: 'http://localhost:8001/api/shopper-'
-    shopper: 'https://shopper.innoflash.net/api/shopper-'
+    shopper: 'http://recepticon.globalwealthtrading.com/api/shopper-'
 };
 
 var messages = {
